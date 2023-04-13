@@ -1,0 +1,45 @@
+#todo-list {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.one-todo {
+  width: 400px;
+  border: 1px solid slategray;
+  margin: 5px;
+}
+
+.one-todo h3 {
+  background-color: white;
+  color: cadetblue;
+  padding: 10px;
+}
+
+.one-todo h2 {
+  color: slategray;
+  padding: 10px;
+}
+
+.one-todo button {
+  margin: 10px;
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 5px 15px;
+}
+
+.delete {
+  background-color: tomato;
+  color: white;
+  border: 1px solid tomato;
+}
+
+.mark {
+  background-color: orange;
+  color: white;
+  border: 1px solid orange;
+}

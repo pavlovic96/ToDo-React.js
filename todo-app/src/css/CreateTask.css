@@ -1,0 +1,30 @@
+#add-task-wrap {
+  width: 100%;
+  text-align: center;
+  padding: 30px;
+}
+
+#add-task {
+  width: 400px;
+  padding: 10px;
+  border: 1px solid rgb(180, 180, 180);
+  border-radius: 10px 0 0 10px;
+  font-size: 20px;
+  outline: none;
+  text-align: center;
+}
+
+#btn {
+  width: 70px;
+  padding: 10px;
+  border: 1px solid cadetblue;
+  background-color: cadetblue;
+  color: rgb(244, 243, 243);
+  border-radius: 0 10px 10px 0;
+  font-size: 20px;
+}
+
+#btn:hover {
+  background-color: white;
+  color: cadetblue;
+}
