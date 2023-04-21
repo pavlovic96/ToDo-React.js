@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import CreateTask from "./components/CreateTask";
 import TodoList from "./components/TodoList";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 //styles
 import "./css/Header.css";
@@ -10,61 +11,75 @@ import "./css/CreateTask.css";
 import "./css/TodoList.css";
 import "./css/Todo.css";
 
-class App extends Component {
-  state = {
-    todos: [],
-  };
+function App() {
+  const [todos, setTodos] = useState([
+    {
+      msg: "do it",
+      date: "09.09.2022.",
+      important: true,
+      done: false,
+    },
+    {
+      msg: "deeeeu it",
+      date: "09.09.2022.",
+      important: true,
+      done: false,
+    },
+  ]);
 
-  componentDidMount() {
-    let data = [];
-    if (localStorage.data) {
-      data = JSON.parse(localStorage.data);
-    }
-    this.setState({
-      todos: data,
-    });
-  }
+  // componentDidMount() {
+  //   let data = [];
+  //   if (localStorage.data) {
+  //     data = JSON.parse(localStorage.data);
+  //   }
+  //   this.setState({
+  //     todos: data,
+  //   });
 
-  componentDidUpdate() {
-    localStorage.data = JSON.stringify([...this.state.todos]);
-  }
+  // }
 
-  inputTask = (task) => {
+  // componentDidUpdate() {
+  //   localStorage.data = JSON.stringify([...this.state.todos]);
+  // }
+
+  const inputTask = (task) => {
     task.id = Math.floor(Math.random() * (10000 - 10) - 10);
-    this.setState({
-      todos: [...this.state.todos, task],
-    });
+    setTodos([...todos, task]);
   };
 
-  deleteTodo = (index) => {
-    let copyTodos = [...this.state.todos];
-    copyTodos.splice(index, 1);
-    this.setState({
-      todos: copyTodos,
-    });
+  const deleteTodo = (index) => {
+    todos.splice(index, 1);
+    setTodos(todos);
   };
 
-  markTodo = (index) => {
-    let copyTodos = [...this.state.todos];
-    copyTodos[index].done = !copyTodos[index].done;
-    this.setState({
-      todos: copyTodos,
-    });
+  const markTodo = (index) => {
+    todos[index].done = !todos[index].done;
+    setTodos(todos);
   };
 
-  render() {
-    return (
-      <div className="App">
+  return (
+    <div className="App">
+      <BrowserRouter>
         <Header />
-        <CreateTask inputTask={this.inputTask} />
-        <TodoList
-          todos={this.state.todos}
-          deleteTodo={this.deleteTodo}
-          markTodo={this.markTodo}
-        />
-      </div>
-    );
-  }
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <TodoList
+                todos={todos}
+                deleteTodo={deleteTodo}
+                markTodo={markTodo}
+              />
+            }
+          />
+          <Route
+            path="/new-task"
+            element={<CreateTask inputTask={inputTask} />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

@@ -1,7 +1,26 @@
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px 0;
+}
+
 .h {
-  padding: 30px;
+  padding-left: 20px;
   color: rgb(186, 5, 83);
   letter-spacing: 3px;
   text-align: center;
-  font-size: 48px;
+  font-size: 40px;
+}
+
+a {
+  text-decoration: none;
+  color: aliceblue;
+  margin-right: 20px;
+  padding: 10px;
+}
+
+.activeLink {
+  border: 1px solid aliceblue;
+  border-radius: 10px;
 }

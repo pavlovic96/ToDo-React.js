@@ -31,6 +31,13 @@ class CreateTask extends Component {
             onChange={this.setMsg}
             value={this.state.msg}
           />
+          <input
+            type="date"
+            name="due-date"
+            id="due-date"
+            placeholder="due date"
+          />
+          <input type="checkbox" name="important" id="important" /> Important
           <button id="btn">Add</button>
         </form>
       </div>

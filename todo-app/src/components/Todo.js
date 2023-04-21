@@ -3,25 +3,25 @@ import React from "react";
 const Todo = ({ todo, index, deleteTodo, markTodo }) => {
   return (
     <div className="one-todo">
-      <h3>Task:{index + 1}</h3>
+      <h3>{index + 1}.</h3>
       <h2 className={todo.done ? "completed" : "incompleted"}>{todo.msg}</h2>
-      <div className="buttons"> 
-      <button
-        className="delete"
-        onClick={() => {
-          deleteTodo(index);
-        }}
-      >
-        Delete
-      </button>
-      <button
-        className="mark"
-        onClick={() => {
-          markTodo(index);
-        }}
-      >
-        Mark
-      </button>
+      <div className="buttons">
+        <button
+          className="delete"
+          onClick={() => {
+            deleteTodo(index);
+          }}
+        >
+          Delete
+        </button>
+        <button
+          className="mark"
+          onClick={() => {
+            markTodo(index);
+          }}
+        >
+          Mark
+        </button>
       </div>
     </div>
   );
