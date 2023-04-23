@@ -18,12 +18,14 @@ function App() {
       date: "09.09.2022.",
       important: true,
       done: false,
+      id: 98,
     },
     {
       msg: "deeeeu it",
       date: "09.09.2022.",
       important: true,
       done: false,
+      id: 9,
     },
   ]);
 
