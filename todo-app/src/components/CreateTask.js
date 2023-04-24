@@ -1,68 +1,71 @@
-import React, { Component } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-class CreateTask extends Component {
-  state = {
+
+
+function CreateTask(props) {
+  const [task, setChange] = useState({
     msg: "",
     dueDate: "",
     important: false,
     done: false,
-  };
+  });
 
-  setChange = (e) => {
-    const input = e.target.id;
-    this.setState({
-      [input]: e.target.value,
-    });
-  };
-
-  setImportant = (e) => {
-    this.setState({ important: e.target.checked });
-  };
-  submit = (e) => {
+  const submit = (e) => {
     e.preventDefault();
-    this.props.inputTask(this.state);
-    this.setState({
+    props.inputTask(task);
+    setChange({
       msg: "",
       dueDate: "",
       important: false,
     });
+    // props.history.push('/')
   };
 
-  render() {
-    return (
-      <div id="add-task-wrap">
-        <form action="" onSubmit={this.submit}>
-          <input
-            type="text"
-            placeholder="Add new task"
-            id="msg"
-            onChange={this.setChange}
-            value={this.state.msg}
-          />
-          <input
-            type="date"
-            name="due-date"
-            id="dueDate"
-            placeholder="due date"
-            onChange={this.setChange}
-            value={this.state.dueDate}
-          />
+  const inputMsg = useRef();
+  useEffect(() => {
+    inputMsg.current.focus();
+  }, []);
 
-          <label className="container">
-            Important
-            <input
-              type="checkbox"
-              id="important"
-              onChange={this.setImportant}
-              checked={this.state.important}
-            />
-            <span className="checkmark"></span>
-          </label>
-          <button id="btn">Add</button>
-        </form>
-      </div>
-    );
-  }
+
+  return (
+    <div id="add-task-wrap">
+      <form action="" onSubmit={submit}>
+        <input
+          type="text"
+          placeholder="Add new task"
+          id="msg"
+          ref={inputMsg}
+          onChange={(e) => {
+            setChange({ ...task, msg: e.target.value });
+          }}
+          value={task.msg}
+        />
+        <input
+          type="date"
+          name="due-date"
+          id="dueDate"
+          placeholder="due date"
+          onChange={(e) => {
+            setChange({ ...task, dueDate: e.target.value });
+          }}
+          value={task.dueDate}
+        />
+
+        <label className="container">
+          Important
+          <input
+            type="checkbox"
+            id="important"
+            onChange={(e) => {
+              setChange({ ...task, important: e.target.checked })}}
+            checked={task.important}
+          />
+          <span className="checkmark"></span>
+        </label>
+        <button id="btn">Add</button>
+      </form>
+    </div>
+  );
 }
 
 export default CreateTask;

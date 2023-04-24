@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import CreateTask from "./components/CreateTask";
 import TodoList from "./components/TodoList";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+// import EditTask from "./components/EditTask";
+import {
+  Routes,
+  Route,
+  BrowserRouter,
+  Routes as Switch,
+} from "react-router-dom";
 
 //styles
 import "./css/Header.css";
@@ -11,74 +17,69 @@ import "./css/CreateTask.css";
 import "./css/TodoList.css";
 import "./css/Todo.css";
 
+export const DeleteContext = React.createContext();
+export const MarkTodoContext = React.createContext();
+
 function App() {
-  const [todos, setTodos] = useState([
-    {
-      msg: "do it",
-      date: "09.09.2022.",
-      important: true,
-      done: false,
-      id: 98,
-    },
-    {
-      msg: "deeeeu it",
-      date: "09.09.2022.",
-      important: true,
-      done: false,
-      id: 9,
-    },
-  ]);
+  const [todos, setTodos] = useState([]);
 
-  // componentDidMount() {
-  //   let data = [];
-  //   if (localStorage.data) {
-  //     data = JSON.parse(localStorage.data);
-  //   }
-  //   this.setState({
-  //     todos: data,
-  //   });
+  useEffect(() => {
+    let data=[];
+    if (localStorage.data) {
+      data = JSON.parse(localStorage.data);
+      setTodos(data);
+      console.log(data);
+    } 
+    
+  }, []);
 
-  // }
-
-  // componentDidUpdate() {
-  //   localStorage.data = JSON.stringify([...this.state.todos]);
-  // }
+  useEffect(() => {
+    localStorage.setItem("data", JSON.stringify(todos));
+  }, [todos]);
 
   const inputTask = (task) => {
     task.id = Math.floor(Math.random() * (10000 - 10) - 10);
-    setTodos([...todos, task]);
+    task.important === true
+      ? setTodos([task, ...todos])
+      : setTodos([...todos, task]);
   };
 
   const deleteTodo = (index) => {
-    todos.splice(index, 1);
-    setTodos(todos);
+    const filteredTodos = todos.filter((todo, i) => i !== index);
+    setTodos(filteredTodos);
   };
 
   const markTodo = (index) => {
-    todos[index].done = !todos[index].done;
-    setTodos(todos);
+    const updatedTodos = todos.map((todo, i) => {
+      if (i === index) {
+        return {
+          ...todo,
+          done: !todo.done,
+        };
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
   };
 
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <TodoList
-                todos={todos}
-                deleteTodo={deleteTodo}
-                markTodo={markTodo}
+        <DeleteContext.Provider value={deleteTodo}>
+          <MarkTodoContext.Provider value={markTodo}>
+            <Routes>
+              {/* <Switch> */}
+              {/* <Route path="/edit" element={<EditTask  todos={todos} />} /> */}{" "}
+              <Route path="/" element={<TodoList todos={todos} />} />
+              {/* </Switch> */}
+              <Route
+                path="/new-task"
+                element={<CreateTask inputTask={inputTask} />}
               />
-            }
-          />
-          <Route
-            path="/new-task"
-            element={<CreateTask inputTask={inputTask} />}
-          />
-        </Routes>
+            </Routes>
+          </MarkTodoContext.Provider>
+        </DeleteContext.Provider>
       </BrowserRouter>
     </div>
   );

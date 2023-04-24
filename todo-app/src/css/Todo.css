@@ -1,3 +1,57 @@
+.one-todo {
+  width: 600px;
+  margin: 5px;
+  padding-left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  border: 1px solid cadetblue;
+}
+
+.one-todo h3 {
+  color: cadetblue;
+  padding: 10px;
+  line-height: 1;
+}
+
+.one-todo h3::before {
+  content: "";
+  background-color: black;
+  width: 100px;
+  height: 100px;
+}
+
+.one-todo h2 {
+  color: slategray;
+  padding: 10px;
+}
+
+.one-todo button, .one-todo a {
+  margin: 10px;
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 5px 15px;
+}
+
+.delete {
+  background-color: tomato;
+  color: white;
+  border: 1px solid tomato;
+}
+
+.mark {
+  background-color: rgb(17, 190, 7);
+  color: white;
+  border: 1px solid rgb(17, 190, 7);
+}
+
+.edit {
+  background-color: orange;
+  color: white;
+  border: 1px solid orange;
+}
+
 h2.completed {
   text-decoration: line-through;
   color: #ffffff;
