@@ -20,21 +20,22 @@ import "./css/Todo.css";
 export const DeleteContext = React.createContext();
 export const MarkTodoContext = React.createContext();
 
+const getLocalItems =()=>{
+  let storedData = localStorage.getItem('data')
+  if (storedData) {
+    const parsedData = JSON.parse(storedData);
+   return parsedData
+  }
+  else {
+    return []
+  }
+}
+
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(getLocalItems());
 
   useEffect(() => {
-    let data=[];
-    if (localStorage.data) {
-      data = JSON.parse(localStorage.data);
-      setTodos(data);
-      console.log(data);
-    } 
-    
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("data", JSON.stringify(todos));
+    window.localStorage.setItem("data", JSON.stringify(todos));
   }, [todos]);
 
   const inputTask = (task) => {
