@@ -54,10 +54,8 @@
 
 h2.completed {
   text-decoration: line-through;
-  color: #ffffff;
 }
 
 h2.incompleted {
   text-decoration: none;
-  color: #dbb81e;
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-
-
+import { useNavigate } from "react-router";
 
 function CreateTask(props) {
   const [task, setChange] = useState({
@@ -10,6 +9,7 @@ function CreateTask(props) {
     done: false,
   });
 
+  const navigate = useNavigate();
   const submit = (e) => {
     e.preventDefault();
     props.inputTask(task);
@@ -18,14 +18,14 @@ function CreateTask(props) {
       dueDate: "",
       important: false,
     });
-    // props.history.push('/')
+
+    navigate("/");
   };
 
   const inputMsg = useRef();
   useEffect(() => {
     inputMsg.current.focus();
   }, []);
-
 
   return (
     <div id="add-task-wrap">
@@ -57,7 +57,8 @@ function CreateTask(props) {
             type="checkbox"
             id="important"
             onChange={(e) => {
-              setChange({ ...task, important: e.target.checked })}}
+              setChange({ ...task, important: e.target.checked });
+            }}
             checked={task.important}
           />
           <span className="checkmark"></span>

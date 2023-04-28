@@ -24,11 +24,8 @@ const Todo = ({ todo, index}) => {
           Done
         </button>
         <Link
-          to="/edit"
+          to={"/edit/"+(index+1)}
           className="edit"
-          onClick={() => {
-            // markTodo(index);
-          }}
         >
           Edit
         </Link>

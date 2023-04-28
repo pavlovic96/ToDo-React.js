@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import CreateTask from "./components/CreateTask";
 import TodoList from "./components/TodoList";
-// import EditTask from "./components/EditTask";
+import EditTask from "./components/EditTask";
 import {
   Routes,
   Route,
@@ -20,16 +20,15 @@ import "./css/Todo.css";
 export const DeleteContext = React.createContext();
 export const MarkTodoContext = React.createContext();
 
-const getLocalItems =()=>{
-  let storedData = localStorage.getItem('data')
+const getLocalItems = () => {
+  let storedData = localStorage.getItem("data");
   if (storedData) {
     const parsedData = JSON.parse(storedData);
-   return parsedData
+    return parsedData;
+  } else {
+    return [];
   }
-  else {
-    return []
-  }
-}
+};
 
 function App() {
   const [todos, setTodos] = useState(getLocalItems());
@@ -63,6 +62,13 @@ function App() {
     setTodos(updatedTodos);
   };
 
+  const editTodo = (task) => {
+    const copyTodos = [...todos];
+    const todoPosition = todos.map((todo) => todo.id).indexOf(task.id);
+    copyTodos[todoPosition] = task;
+    setTodos(copyTodos);
+  };
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -70,13 +76,14 @@ function App() {
         <DeleteContext.Provider value={deleteTodo}>
           <MarkTodoContext.Provider value={markTodo}>
             <Routes>
-              {/* <Switch> */}
-              {/* <Route path="/edit" element={<EditTask  todos={todos} />} /> */}{" "}
               <Route path="/" element={<TodoList todos={todos} />} />
-              {/* </Switch> */}
               <Route
                 path="/new-task"
                 element={<CreateTask inputTask={inputTask} />}
+              />
+              <Route
+                path="/edit/:index"
+                element={<EditTask todos={todos} editTodo={editTodo} />}
               />
             </Routes>
           </MarkTodoContext.Provider>

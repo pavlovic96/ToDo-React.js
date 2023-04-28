@@ -1,38 +1,57 @@
-import React, { Component, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 
-class EditTask extends Component {
+function EditTask(props) {
+  const [task, setChange] = useState({
+    msg: "",
+    date: "",
+    important: "",
+    done: "",
+    id: "",
+  });
 
-    state = {
-        task: {msg: "do it",
-        date: "09.09.2022.",
-        important: true,
-        done: false,
-        id: 98,
-        }
-    }
+  const {index} = useParams();
+
+ useEffect(()=>{
+  const todoToEdit = props.todos[index-1];
+  setChange(todoToEdit);
+ },[])
 
 
-render() {
+  const navigate = useNavigate();
+  const submit = (e) => {
+    e.preventDefault();
+    props.editTodo(task);
+    setChange({
+      msg: "",
+      dueDate: "",
+      important: false,
+    });
+
+    navigate("/");
+  };
+
   return (
     <div id="add-task-wrap">
-      <form
-        action=""
-           onSubmit={edit}
-      >
+      <form action="" onSubmit={submit}>
         <input
           type="text"
           placeholder="Add new task"
           id="msg"
-          onChange={setChange}
-          value={state.msg}
+          onChange={(e) => {
+            setChange({ ...task, msg: e.target.value });
+          }}
+          value={task.msg}
         />
         <input
           type="date"
           name="due-date"
           id="dueDate"
           placeholder="due date"
-            onChange={setChange}
-            value={state.dueDate}
+          onChange={(e) => {
+            setChange({ ...task, dueDate: e.target.value });
+          }}
+          value={task.dueDate}
         />
 
         <label className="container">
@@ -40,8 +59,10 @@ render() {
           <input
             type="checkbox"
             id="important"
-            onChange={setImportant}
-            checked={state.important}
+            onChange={(e) => {
+              setChange({ ...task, important: e.target.checked });
+            }}
+            checked={task.important}
           />
           <span className="checkmark"></span>
         </label>
@@ -50,5 +71,5 @@ render() {
     </div>
   );
 }
-}
+
 export default EditTask;
