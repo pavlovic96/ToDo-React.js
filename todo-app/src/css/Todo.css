@@ -27,11 +27,15 @@
   padding: 10px;
 }
 
-.one-todo button, .one-todo a {
+.one-todo button {
   margin: 10px;
   font-size: 20px;
   border-radius: 10px;
   padding: 5px 15px;
+}
+
+.one-todo a {
+  
 }
 
 .delete {
