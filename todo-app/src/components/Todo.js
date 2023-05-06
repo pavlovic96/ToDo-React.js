@@ -3,16 +3,20 @@ import { Link } from "react-router-dom";
 import { DeleteContext } from "../App";
 import { MarkTodoContext } from "../App";
 
-const Todo = ({ todo, index}) => {
+const Todo = ({ todo, index }) => {
   const deleteTodo = useContext(DeleteContext);
   const markTodo = useContext(MarkTodoContext);
 
   return (
-    <div className="one-todo">
-      <h3>{index + 1}.</h3>
-      <div className="data">
-      <h2 className={todo.done ? "completed" : "incompleted"}>{todo.msg}</h2>
-      <p>Due date: {todo.dueDate}</p>
+    <div className={todo.important ? "important-todo" : "one-todo"}>
+      <div className="details">
+        <h1>{todo.important ? "!" : null}</h1>
+        <div className="data">
+          <h4 className={todo.done ? "completed" : "incompleted"}>
+            {todo.msg}
+          </h4>
+          <p>Due date: {todo.dueDate}</p>
+        </div>
       </div>
       <div className="buttons">
         <button
@@ -21,13 +25,10 @@ const Todo = ({ todo, index}) => {
             markTodo(index);
           }}
         >
-          Done
+          <span className="material-symbols-outlined">done</span>
         </button>
-        <Link
-          to={"/edit/"+(index+1)}
-          className="edit"
-        >
-          Edit
+        <Link to={"/edit/" + (index + 1)} className="edit">
+          <span className="material-symbols-outlined">edit</span>
         </Link>
         <button
           className="delete"
@@ -35,7 +36,9 @@ const Todo = ({ todo, index}) => {
             deleteTodo(index);
           }}
         >
-          Delete
+         <span className="material-symbols-outlined">
+delete
+</span>
         </button>
       </div>
     </div>

@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import CreateTask from "./components/CreateTask";
 import TodoList from "./components/TodoList";
 import EditTask from "./components/EditTask";
+import Score from "./components/Score";
 import {
   Routes,
   Route,
@@ -16,6 +17,7 @@ import "./css/Header.css";
 import "./css/CreateTask.css";
 import "./css/TodoList.css";
 import "./css/Todo.css";
+import "./css/Score.css"
 
 export const DeleteContext = React.createContext();
 export const MarkTodoContext = React.createContext();
@@ -73,6 +75,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Header />
+        <Score todos = {todos}/>
         <DeleteContext.Provider value={deleteTodo}>
           <MarkTodoContext.Provider value={markTodo}>
             <Routes>

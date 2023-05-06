@@ -41,7 +41,7 @@ function EditTask(props) {
           onChange={(e) => {
             setChange({ ...task, msg: e.target.value });
           }}
-          value={task.msg}
+          defaultValue={task.msg}
         />
         <input
           type="date"
@@ -51,7 +51,7 @@ function EditTask(props) {
           onChange={(e) => {
             setChange({ ...task, dueDate: e.target.value });
           }}
-          value={task.dueDate}
+          defaultValue={task.dueDate}
         />
 
         <label className="container">
@@ -66,7 +66,7 @@ function EditTask(props) {
           />
           <span className="checkmark"></span>
         </label>
-        <button id="btn">Edit</button>
+        <button id="btn-edit">Edit</button>
       </form>
     </div>
   );

@@ -1,65 +1,76 @@
 .one-todo {
   width: 600px;
-  margin: 5px;
-  padding-left: 30px;
+  margin-bottom: 5px;
+  padding: 10px 20px 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 10px;
-  border: 1px solid cadetblue;
+  border: 1px solid rgba(86, 86, 135, 0.378);
+  border-radius: 5px;
 }
 
-.one-todo h3 {
-  color: cadetblue;
-  padding: 10px;
-  line-height: 1;
+.important-todo {
+  position: relative;
+  width: 600px;
+  margin-bottom: 5px;
+  padding: 10px 20px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid  rgba(232, 231, 231, 0.796);;
+  border-radius: 5px;
+  background-color:rgba(233, 192, 56, 0.478)
 }
 
-.one-todo h3::before {
-  content: "";
-  background-color: black;
-  width: 100px;
-  height: 100px;
+
+.important-todo .details h1 {
+position: absolute; 
+ left: 7px;
+top: 11px;
+font-size: 48px; 
+color: rgb(249, 148, 59);
 }
 
-.one-todo h2 {
-  color: slategray;
-  padding: 10px;
+.data {
+  text-align: left;
+  padding: 0 10px;
+  color: rgb(99, 99, 113);
+}
+.data p {
+  font-size: 12px;
+  color: rgb(147, 147, 148);
 }
 
-.one-todo button {
+.buttons a {
   margin: 10px;
-  font-size: 20px;
-  border-radius: 10px;
   padding: 5px 15px;
 }
 
-.one-todo a {
-  
+.material-symbols-outlined {
+  font-size: 32px;
+ }
+ 
+.mark {
+ border: none;
+ background-color: transparent;
+ color: green
 }
 
 .delete {
-  background-color: tomato;
-  color: white;
-  border: 1px solid tomato;
+  border: none;
+ background-color: transparent;
+  color: rgb(193, 3, 3);
 }
 
-.mark {
-  background-color: rgb(17, 190, 7);
-  color: white;
-  border: 1px solid rgb(17, 190, 7);
-}
 
 .edit {
-  background-color: orange;
-  color: white;
-  border: 1px solid orange;
+  color: rgb(255, 187, 0);
 }
 
-h2.completed {
+h4.completed {
   text-decoration: line-through;
 }
 
-h2.incompleted {
+h4.incompleted {
   text-decoration: none;
 }

@@ -1,13 +1,16 @@
 nav {
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  margin: 20px 0;
+  align-items:center;
+  padding: 20px 0;
+  background-color: rgb(86, 86, 135);
 }
-
+ul {
+  margin-bottom: 0;
+}
 .h {
   padding-left: 20px;
-  color: rgb(186, 5, 83);
+  color: rgb(237, 237, 237);
   letter-spacing: 3px;
   text-align: center;
   font-size: 40px;
@@ -15,12 +18,13 @@ nav {
 
 a {
   text-decoration: none;
-  color: aliceblue;
+  color:rgb(237, 237, 237);
   margin-right: 20px;
-  padding: 10px;
+  padding: 15px;
+  font-size: 20px;
 }
 
 .activeLink {
-  border: 1px solid aliceblue;
+  border: 1px solid rgb(237, 237, 237);;
   border-radius: 10px;
 }
